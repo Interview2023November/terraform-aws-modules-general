@@ -18,6 +18,8 @@ things_are_good () {
 
   sleep 5
 
+  # Shellcheck recommendation to introduce nested quotes is not worth it since we know the return will be an int.
+  # shellcheck disable=SC2046
   while [ $(mysql --host="$ADDRESS" --port="$PORT" --user="$USERNAME" --password="$PASSWORD" -Bse "") -eq 0 ];
   do
     sleep 5
@@ -36,6 +38,8 @@ i_am_sad () {
 
   sleep 5
 
+  # Shellcheck recommendation to introduce nested quotes is not worth it since we know the return will be an int.
+  # shellcheck disable=SC2046
   while [ $(mysql --host="$ADDRESS" --port="$PORT" --user="$USERNAME" --password="$PASSWORD" -Bse "") -ne 0 ];
   do
     sleep 5
@@ -48,6 +52,8 @@ while true;
 do
   sleep 5
 
+  # Shellcheck recommendation to introduce nested quotes is not worth it since we know the return will be an int.
+  # shellcheck disable=SC2046
   if [ $(mysql --host="$ADDRESS" --port="$PORT" --user="$USERNAME" --password="$PASSWORD" -Bse "") -eq 0 ];
   then
     things_are_good
