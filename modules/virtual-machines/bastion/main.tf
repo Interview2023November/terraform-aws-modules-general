@@ -8,10 +8,13 @@ resource "aws_instance" "bastion" {
   #ts:skip=AC_AWS_0480 Skip detailed monitoring scan for now as we have enabled as the default
   monitoring = var.monitoring
 
-  metadata_options {
-    # Don't allow IMDSV1 to be used
-    http_tokens = "required"
-  }
+  # Currently if we want ssh to function without heavier AMI customization we have to live with IMDSV1
+  # See https://stackoverflow.com/questions/65035324/unable-to-ssh-into-aws-ec2-instance-with-instance-metadata-turned-off
+  #ts:skip=AC-AWS-NS-IN-M-1172
+  # metadata_options {
+  #   # Don't allow IMDSV1 to be used
+  #   http_tokens   = "required"
+  # }
 
   user_data = var.user_data
 
