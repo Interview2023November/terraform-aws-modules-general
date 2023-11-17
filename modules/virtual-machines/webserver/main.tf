@@ -3,7 +3,7 @@ resource "aws_instance" "webserver" {
   instance_type          = var.instance_type
   vpc_security_group_ids = var.vpc_security_group_ids
   
-  #ts:skip=AWS.AI.LM.HIGH.0070 Skip detailed monitoring scan for now as we have enabled as the default
+  #ts:skip=AC_AWS_0480 Skip detailed monitoring scan for now as we have enabled as the default
   monitoring = var.monitoring
 
   metadata_options {
