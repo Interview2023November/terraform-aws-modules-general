@@ -36,7 +36,7 @@ variable "allocated_Storage_gb" {
 }
 
 variable "backup_retention_period" {
-  description = "The allocated storage for this RDS instance."
+  description = "The number of days backups will be retained for."
   type        = number
   default     = 0
 }
