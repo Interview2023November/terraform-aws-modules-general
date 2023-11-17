@@ -28,8 +28,8 @@ func TestMyBastion(t *testing.T) {
 
 		// Variables for our terraform call
 		Vars: map[string]interface{}{
-			"key_pair_name": keyPairName,
-			"region":        awsRegion,
+			"key_name": keyPairName,
+			"region":   awsRegion,
 		},
 	})
 	defer terraform.Destroy(t, terraformOptions)
