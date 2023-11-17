@@ -4,7 +4,7 @@
 # ---------------------------------------------------------------------------------------------------------------------
 
 variable "name" {
-  description = "The name for the DB server."
+  description = "The for the DB server."
   type        = string
 }
 
