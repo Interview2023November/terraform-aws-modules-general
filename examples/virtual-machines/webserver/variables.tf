@@ -19,5 +19,5 @@ variable "ami" {
   type        = string
   # We will hardcode the AMI to our packer built image.
   # In the real world we might orchestrate this with CI workflows or similar.
-  default     = "ami-0a4a145b049f27673"
+  default = "ami-0a4a145b049f27673"
 }

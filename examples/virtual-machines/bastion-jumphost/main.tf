@@ -26,7 +26,7 @@ resource "aws_instance" "backend" {
 }
 
 resource "aws_security_group" "ssh_access" {
-   #ts:skip=AC_AWS_0227 Skip unrestricted port requirement for example resource
+  #ts:skip=AC_AWS_0227 Skip unrestricted port requirement for example resource
 
   egress {
     from_port   = 0

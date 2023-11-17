@@ -44,13 +44,13 @@ variable "backup_retention_period" {
 variable "enabled_cloudwatch_logs_exports" {
   description = "Set of log types to enable for exporting to CloudWatch logs. Allowed values are: audit, error, general, slowquery"
   type        = list(string)
-  default     = []  
+  default     = []
   validation {
     condition = alltrue([
       for s in var.enabled_cloudwatch_logs_exports : contains(["audit", "error", "general", "slowquery"], s)
     ])
     error_message = "Valid values for var: enabled_cloudwatch_logs_exports are (audit, error, general, slowquery)."
-  } 
+  }
 }
 
 variable "iam_database_authentication_enabled" {

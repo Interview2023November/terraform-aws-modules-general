@@ -18,10 +18,10 @@ variable "ami" {
   type        = string
   # We will hardcode the AMI to our packer built image.
   # In the real world we would orchestrate with CI workflows or similar.
-  default     = "ami-0ca34949803acc44e"
+  default = "ami-0ca34949803acc44e"
 }
 
-variable "associate_public_ip_address"  {
+variable "associate_public_ip_address" {
   description = "If true, the launched EC2 instance will have a public IP attached."
   type        = bool
   default     = false
