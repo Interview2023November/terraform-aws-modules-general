@@ -7,6 +7,8 @@ module "database_server" {
   db_name                = var.db_name
   instance_class         = var.instance_class
   port                   = var.port
+  # These options make testing and manual work in an example setting convenient
+  # For prod environments we'd want to consider policy tools like OPA to prevent them from being configured
   skip_final_snapshot    = true
   publicly_accessible    = true
   db_subnet_group_name   = aws_db_subnet_group.db_subnet_group.id

@@ -9,13 +9,15 @@
 # ---------------------------------------------------------------------------------------------------------------------
 
 variable "region" {
-  description = "The the region where the DB is located."
+  description = "The region where the webserver is located."
   type        = string
   default     = "us-east-2"
 }
 
 variable "ami" {
-  description = "The the region where the DB is located."
+  description = "The AMI the webserver will run."
   type        = string
-  default     = "ami-0d5d9d301c853a04a"
+  # We will hardcode the AMI to our packer built image.
+  # In the real world we might orchestrate this with CI workflows or similar.
+  default     = "ami-0a4a145b049f27673"
 }
