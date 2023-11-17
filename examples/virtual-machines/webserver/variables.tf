@@ -13,3 +13,9 @@ variable "region" {
   type        = string
   default     = "us-east-2"
 }
+
+variable "ami" {
+  description = "The the region where the DB is located."
+  type        = string
+  default     = "ami-0d5d9d301c853a04a"
+}
