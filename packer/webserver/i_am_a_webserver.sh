@@ -16,12 +16,11 @@ things_are_good () {
 
   export webserver_pid="$!"
 
-  mysql --host=$ADDRESS --port=$PORT --user=$USERNAME --password=$PASSWORD -Bse ""
+  sleep 5
 
-  while [ $? -eq 0 ];
+  while [ $(mysql --host="$ADDRESS" --port="$PORT" --user="$USERNAME" --password="$PASSWORD" -Bse "") -eq 0 ];
   do
     sleep 5
-    mysql --host=$ADDRESS --port=$PORT --user=$USERNAME --password=$PASSWORD -Bse ""
   done
 
   kill $webserver_pid
@@ -35,12 +34,11 @@ i_am_sad () {
 
   export webserver_pid="$!"
 
-  mysql --host=$ADDRESS --port=$PORT --user=$USERNAME --password=$PASSWORD -Bse ""
+  sleep 5
 
-  while [ $? -ne 0 ];
+  while [ $(mysql --host="$ADDRESS" --port="$PORT" --user="$USERNAME" --password="$PASSWORD" -Bse "") -ne 0 ];
   do
     sleep 5
-    mysql --host=$ADDRESS --port=$PORT --user=$USERNAME --password=$PASSWORD -Bse ""
   done
 
   kill $webserver_pid
@@ -50,9 +48,7 @@ while true;
 do
   sleep 5
 
-  mysql --host=$ADDRESS --port=$PORT --user=$USERNAME --password=$PASSWORD -Bse ""
-
-  if [ $? -eq 0 ];
+  if [ $(mysql --host="$ADDRESS" --port="$PORT" --user="$USERNAME" --password="$PASSWORD" -Bse "") -eq 0 ];
   then
     things_are_good
   else

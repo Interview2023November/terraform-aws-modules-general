@@ -20,13 +20,7 @@ variable "instance_type" {
 variable "monitoring" {
   description = "If true, the launched EC2 instance will have detailed monitoring enabled."
   type        = bool
-  default     = false
-}
-
-variable "region" {
-  description = "The region where this webserver will run."
-  type        = string
-  default     = "us-east-2"
+  default     = true
 }
 
 variable "vpc_security_group_ids" {

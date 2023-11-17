@@ -4,6 +4,8 @@ module "webserver" {
   ami                    = var.ami
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.instance.id]
+  # Detailed monitoring is not needed in an example setting
+  monitoring             = false
 
   user_data = <<EOF
 #!/bin/bash
