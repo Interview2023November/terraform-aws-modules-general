@@ -53,9 +53,3 @@ variable "back_end_private_cidr_b" {
   type        = string
   default     = "10.0.3.0/24"
 }
-
-variable "region" {
-  description = "The the region where the bastion is located."
-  type        = string
-  default     = "us-east-2"
-}

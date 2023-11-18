@@ -27,14 +27,3 @@ variable "vpc_id" {
   description = "The ID of the VPC this subnet belongs to."
   type        = string
 }
-
-# ---------------------------------------------------------------------------------------------------------------------
-# OPTIONAL PARAMETERS
-# These parameters have reasonable defaults.
-# ---------------------------------------------------------------------------------------------------------------------
-
-variable "region" {
-  description = "The region where the bastion is located."
-  type        = string
-  default     = "us-east-2"
-}

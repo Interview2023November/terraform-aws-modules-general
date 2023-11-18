@@ -1,7 +1,3 @@
-locals {
-  database_port = 3306
-}
-
 module "vpc" {
   source = "../../../modules/networking/vpc-3-tier"
 

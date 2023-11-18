@@ -1,7 +1,7 @@
 module "bastion" {
   source = "../../../modules/virtual-machines/bastion"
 
-  name                   =  "${var.name}-bastion"
+  name                   = "${var.name}-bastion"
   ami                    = "ami-0ca34949803acc44e"
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.bastion.id]
@@ -34,16 +34,16 @@ resource "aws_vpc_security_group_egress_rule" "allow_bastion_access_to_webserver
   security_group_id = aws_security_group.bastion.id
 
   referenced_security_group_id = aws_security_group.app.id
-  from_port   = var.ssh_port
-  ip_protocol = "tcp"
-  to_port     = var.ssh_port
+  from_port                    = var.ssh_port
+  ip_protocol                  = "tcp"
+  to_port                      = var.ssh_port
 }
 
 resource "aws_vpc_security_group_ingress_rule" "allow_webserver_access_from_bastion" {
   security_group_id = aws_security_group.app.id
 
   referenced_security_group_id = aws_security_group.bastion.id
-  from_port   = var.ssh_port
-  ip_protocol = "tcp"
-  to_port     = var.ssh_port
+  from_port                    = var.ssh_port
+  ip_protocol                  = "tcp"
+  to_port                      = var.ssh_port
 }

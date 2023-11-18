@@ -76,8 +76,8 @@ func TestMyApp(t *testing.T) {
 		return "", nil
 	})
 
-	appUrl := terraform.Output(t, terraformOptions, "app_url")
+	appURL := terraform.Output(t, terraformOptions, "app_url")
 
 	// Make sure the webserver has its dependencies available.
-	http_helper.HttpGetWithRetry(t, appUrl, nil, 200, "I can reach the database, things are good.", 30, 5*time.Second)
+	http_helper.HttpGetWithRetry(t, appURL, nil, 200, "I can reach the database, things are good.", 30, 5*time.Second)
 }

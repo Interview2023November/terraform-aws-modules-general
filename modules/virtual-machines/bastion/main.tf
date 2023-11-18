@@ -11,7 +11,7 @@ resource "aws_instance" "bastion" {
 
   # Currently if we want ssh to function without heavier AMI customization we have to live with IMDSV1
   # See https://stackoverflow.com/questions/65035324/unable-to-ssh-into-aws-ec2-instance-with-instance-metadata-turned-off
-  #ts:skip=AC-AWS-NS-IN-M-1172
+  #ts:skip=AC_AWS_0479
   # metadata_options {
   #   # Don't allow IMDSV1 to be used
   #   http_tokens   = "required"

@@ -47,31 +47,31 @@ resource "aws_vpc_security_group_ingress_rule" "allow_db_access_from_private_fro
   security_group_id = aws_security_group.db.id
 
   referenced_security_group_id = aws_security_group.app.id
-  from_port   = var.db_port
-  ip_protocol = "tcp"
-  to_port     = var.db_port
+  from_port                    = var.db_port
+  ip_protocol                  = "tcp"
+  to_port                      = var.db_port
 }
 
 resource "aws_vpc_security_group_egress_rule" "allow_private_front_end_access_to_db" {
   security_group_id = aws_security_group.app.id
 
   referenced_security_group_id = aws_security_group.db.id
-  from_port   = var.db_port
-  ip_protocol = "tcp"
-  to_port     = var.db_port
+  from_port                    = var.db_port
+  ip_protocol                  = "tcp"
+  to_port                      = var.db_port
 }
 
 module "webserver" {
   source = "../../../modules/virtual-machines/webserver"
 
-  name                   =  "${var.name}-webserver"
+  name                   = "${var.name}-webserver"
   ami                    = var.webserver_ami
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.app.id]
   key_name               = var.key_name
   # Detailed monitoring is not needed in an example setting
   monitoring = false
-  subnet_id  = module.vpc.front_end_private_subnet_id 
+  subnet_id  = module.vpc.front_end_private_subnet_id
 
   user_data = <<EOF
 #!/bin/bash
@@ -83,18 +83,18 @@ resource "aws_vpc_security_group_ingress_rule" "allow_webserver_access_from_lb" 
   security_group_id = aws_security_group.app.id
 
   referenced_security_group_id = aws_security_group.lb.id
-  from_port   = var.webserver_port
-  ip_protocol = "tcp"
-  to_port     = var.webserver_port
+  from_port                    = var.webserver_port
+  ip_protocol                  = "tcp"
+  to_port                      = var.webserver_port
 }
 
 resource "aws_vpc_security_group_egress_rule" "allow_lb_access_to_webserver" {
   security_group_id = aws_security_group.lb.id
 
   referenced_security_group_id = aws_security_group.app.id
-  from_port   = var.webserver_port
-  ip_protocol = "tcp"
-  to_port     = var.webserver_port
+  from_port                    = var.webserver_port
+  ip_protocol                  = "tcp"
+  to_port                      = var.webserver_port
 }
 
 resource "aws_vpc_security_group_egress_rule" "allow_webserver_access_to_nat" {

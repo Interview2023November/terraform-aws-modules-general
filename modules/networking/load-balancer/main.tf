@@ -20,6 +20,8 @@ resource "aws_lb" "this" {
 }
 
 resource "aws_lb_target_group" "this" {
+  #ts:skip=AWS.ALTG.IS.MEDIUM.0042 Upgrading our backends to support e2e HTTPS is considered out of scope currently.
+
   name     = "${var.name}-tg"
   port     = var.target_port
   protocol = "HTTP"
@@ -64,6 +66,8 @@ resource "aws_route53_record" "lb_dns" {
 }
 
 resource "aws_lb_listener" "http_redirect" {
+  #ts:skip=AWS.ALL.IS.MEDIUM.0046 We *do* have an HTTPS listener.
+
   count = var.redirect_http ? 1 : 0
 
   load_balancer_arn = aws_lb.this.arn
