@@ -7,36 +7,40 @@ import (
 	"time"
 
 	"github.com/gruntwork-io/terratest/modules/aws"
+	http_helper "github.com/gruntwork-io/terratest/modules/http-helper"
 	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/retry"
 	"github.com/gruntwork-io/terratest/modules/ssh"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
-func TestMyBastion(t *testing.T) {
+func TestMyApp(t *testing.T) {
 	t.Parallel()
 
 	// Create dependencies we need to test SSH access
 	awsRegion := "us-east-2"
 	uniqueID := random.UniqueId()
-	keyPairName := fmt.Sprintf("terratest-ssh-example-%s", uniqueID)
+	keyPairName := fmt.Sprintf("terratest-app-example-%s", uniqueID)
 	keyPair := aws.CreateAndImportEC2KeyPair(t, awsRegion, keyPairName)
 	defer aws.DeleteEC2KeyPair(t, keyPair)
 
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
-		TerraformDir: "../examples/virtual-machines/bastion-jumphost",
+		TerraformDir: "../../examples/integration/app-3-tier",
 
 		// Variables for our terraform call
 		Vars: map[string]interface{}{
-			"key_name": keyPairName,
-			"region":   awsRegion,
+			"key_name":    keyPairName,
+			"region":      awsRegion,
+			"db_username": "username",
+			"db_password": "username",
+			"db_name":     "example_db",
 		},
 	})
 	defer terraform.Destroy(t, terraformOptions)
 
 	terraform.InitAndApply(t, terraformOptions)
 	bastionPublicIP := terraform.Output(t, terraformOptions, "bastion_public_ip")
-	backendPrivateIP := terraform.Output(t, terraformOptions, "backend_private_ip")
+	backendPrivateIP := terraform.Output(t, terraformOptions, "webserver_ip")
 
 	// Make sure we can make the SSH-hop from the bastion to the backend server
 	publicHost := ssh.Host{
@@ -71,4 +75,9 @@ func TestMyBastion(t *testing.T) {
 
 		return "", nil
 	})
+
+	appURL := terraform.Output(t, terraformOptions, "app_url")
+
+	// Make sure the webserver has its dependencies available.
+	http_helper.HttpGetWithRetry(t, appURL, nil, 200, "I can reach the database, things are good.", 30, 5*time.Second)
 }

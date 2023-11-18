@@ -13,7 +13,7 @@ func TestMyWebserver(t *testing.T) {
 	t.Parallel()
 
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
-		TerraformDir: "../examples/virtual-machines/webserver",
+		TerraformDir: "../../examples/virtual-machines/webserver",
 	})
 
 	defer terraform.Destroy(t, terraformOptions)
