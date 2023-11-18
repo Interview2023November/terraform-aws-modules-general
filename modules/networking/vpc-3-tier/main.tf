@@ -1,4 +1,9 @@
 resource "aws_vpc" "this" {
+  #ts:skip=AWS.VPC.Logging.Medium.0470 Leaving flow logging out of scope for this implementation.
+  # In a production setting we would likely want to log at least rejected traffic.
+  # Logging all traffic can get quite expensive, so sometimes the best approach is to sample a fraction of your VPCs
+  # or all of your VPCs a fraction of the time.
+
   cidr_block = var.vpc_cidr
 
   tags = {
