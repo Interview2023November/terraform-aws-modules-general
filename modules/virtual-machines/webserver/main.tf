@@ -2,6 +2,7 @@ resource "aws_instance" "webserver" {
   ami                    = var.ami
   instance_type          = var.instance_type
   vpc_security_group_ids = var.vpc_security_group_ids
+  subnet_id              = var.subnet_id
 
   #ts:skip=AC_AWS_0480 Skip detailed monitoring scan for now as we have enabled as the default
   monitoring = var.monitoring
@@ -19,6 +20,7 @@ resource "aws_instance" "webserver" {
   user_data = var.user_data
 
   tags = {
+    Name        = var.name
     server-type = "app"
   }
 }

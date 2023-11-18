@@ -39,14 +39,26 @@ variable "monitoring" {
   default     = true
 }
 
-variable "vpc_security_group_ids" {
-  description = "The list of security IDs which will associate to this EC2."
-  type        = list(string)
-  default     = []
+variable "name" {
+  description = "The name of the bastion."
+  type        = string
+  default     = "bastion"
+}
+
+variable "subnet_id" {
+  description = "The subnet where the bastion will be attached."
+  type        = string
+  default     = null
 }
 
 variable "user_data" {
   description = "User data to provide when launching the instance."
   type        = string
   default     = null
+}
+
+variable "vpc_security_group_ids" {
+  description = "The list of security IDs which will associate to this EC2."
+  type        = list(string)
+  default     = []
 }

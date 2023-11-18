@@ -28,7 +28,7 @@ func TestMysql(t *testing.T) {
 	// Construct the terraform options
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 
-		TerraformDir: "../examples/data-stores/mysql",
+		TerraformDir: "../../examples/data-stores/mysql",
 
 		// Variables for our terraform call
 		Vars: map[string]interface{}{

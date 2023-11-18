@@ -24,7 +24,7 @@ func TestMyBastion(t *testing.T) {
 	defer aws.DeleteEC2KeyPair(t, keyPair)
 
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
-		TerraformDir: "../examples/virtual-machines/bastion-jumphost",
+		TerraformDir: "../../examples/virtual-machines/bastion-jumphost",
 
 		// Variables for our terraform call
 		Vars: map[string]interface{}{

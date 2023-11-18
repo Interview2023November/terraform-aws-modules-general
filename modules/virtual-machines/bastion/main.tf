@@ -4,6 +4,7 @@ resource "aws_instance" "bastion" {
   vpc_security_group_ids      = var.vpc_security_group_ids
   key_name                    = var.key_name
   associate_public_ip_address = var.associate_public_ip_address
+  subnet_id                   = var.subnet_id
 
   #ts:skip=AC_AWS_0480 Skip detailed monitoring scan for now as we have enabled as the default
   monitoring = var.monitoring
@@ -19,6 +20,7 @@ resource "aws_instance" "bastion" {
   user_data = var.user_data
 
   tags = {
+    Name        = var.name
     server-type = "bastion"
   }
 }

@@ -29,6 +29,18 @@ variable "monitoring" {
   default     = true
 }
 
+variable "name" {
+  description = "The name of the webserver."
+  type        = string
+  default     = "webserver"
+}
+
+variable "subnet_id" {
+  description = "The subnet where the webserver will be attached."
+  type        = string
+  default     = null
+}
+
 variable "vpc_security_group_ids" {
   description = "The list of security IDs which will associate to this EC2."
   type        = list(string)
