@@ -1,23 +1,25 @@
+#!/usr/bin/env python
+
 import json
+from typing import Any
+
 import boto3
 
 ec2 = boto3.client("ec2", region_name="us-east-2")
 paginator = ec2.get_paginator("describe_instances")
 
-ami_summary_dict = {}
+ami_summary_dict: dict[str, dict] = {}
 
 for page in paginator.paginate():
     for res in page["Reservations"]:
         for inst in res["Instances"]:
             if inst["ImageId"] not in ami_summary_dict:
-                ami_descriptions_dict = {}
+                ami_descriptions_dict: dict[str, Any] = {}
                 ami_descriptions_dict["InstanceIds"] = []
                 ami_summary_dict[inst["ImageId"]] = ami_descriptions_dict
             ami_summary_dict[inst["ImageId"]]["InstanceIds"].append(inst["InstanceId"])
 
-response = ec2.describe_images(
-    ImageIds=list(ami_summary_dict.keys())
-)
+response = ec2.describe_images(ImageIds=list(ami_summary_dict.keys()))
 
 for image in response["Images"]:
     current_ami = image["ImageId"]

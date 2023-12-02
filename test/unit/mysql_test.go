@@ -20,7 +20,7 @@ func TestMysql(t *testing.T) {
 	expectedPort := int64(3306)
 	expectedDatabaseName := "test_database"
 	username := "username"
-	password := "password"
+	password := "password" //gitleaks:allow
 
 	// For simplicity, stick to the us-east-2 region. In actual applications we'd want to randomize this.
 	awsRegion := "us-east-2"
